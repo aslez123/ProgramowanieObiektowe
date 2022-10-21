@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class World {
+public abstract class World {
 
     static void run(List<Direction> dir){
         out.println("Start");
@@ -41,9 +41,25 @@ public class World {
         return dir;
     }
 
+
     public static void main(String[] args){
         out.println("System wystartował");
         run(convert(Arrays.toString(args)));
         out.println("System zakończył działanie");
+
+
+        Vector2d position1 = new Vector2d(1,2);
+        System.out.println(position1);
+        Vector2d position2 = new Vector2d(-2,1);
+        System.out.println(position2);
+        System.out.println(position1.add(position2));
+
+        MapDirection direction = MapDirection.SOUTH;
+        out.println(direction.next());
+        out.println(direction.previous());
+        out.println(direction.toUnitVector());
+        out.println(direction.toString());
     }
+
+    abstract String toString(int x, int y);
 }

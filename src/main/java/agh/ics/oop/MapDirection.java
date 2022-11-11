@@ -9,58 +9,38 @@ public enum MapDirection {
 
     @Override
     public String toString() {
-        switch (this) {
-            case NORTH:
-                return "Polnoc";
-            case SOUTH:
-                return "Poludnie";
-            case WEST:
-                return "Zachod";
-            case EAST:
-                return "Wschod";
-        }
-        return null;
+        return switch (this) {
+            case NORTH -> "Polnoc";
+            case SOUTH -> "Poludnie";
+            case WEST -> "Zachod";
+            case EAST -> "Wschod";
+        };
     }
 
     public Enum<MapDirection> next() {
-        switch (this) {
-            case NORTH:
-                return EAST;
-            case SOUTH:
-                return WEST;
-            case WEST:
-                return NORTH;
-            case EAST:
-                return SOUTH;
-        }
-        return null;
+        return switch (this) {
+            case NORTH -> EAST;
+            case SOUTH -> WEST;
+            case WEST -> NORTH;
+            case EAST -> SOUTH;
+        };
     }
 
     public Enum<MapDirection> previous() {
-        switch (this) {
-            case NORTH:
-                return WEST;
-            case SOUTH:
-                return EAST;
-            case WEST:
-                return SOUTH;
-            case EAST:
-                return NORTH;
-        }
-        return null;
+        return switch (this) {
+            case NORTH -> WEST;
+            case SOUTH -> EAST;
+            case WEST -> SOUTH;
+            case EAST -> NORTH;
+        };
     }
 
     public Vector2d toUnitVector() {
-        switch (this) {
-            case NORTH:
-                return new Vector2d(0,1);
-            case SOUTH:
-                return new Vector2d(0,-1);
-            case WEST:
-                return new Vector2d(-1,0);
-            case EAST:
-                return new Vector2d(1,0);
-        }
-        return null;
+        return switch (this) {
+            case NORTH -> new Vector2d(0, 1);
+            case SOUTH -> new Vector2d(0, -1);
+            case WEST -> new Vector2d(-1, 0);
+            case EAST -> new Vector2d(1, 0);
+        };
     }
 }

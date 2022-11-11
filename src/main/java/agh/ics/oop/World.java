@@ -1,4 +1,5 @@
 package agh.ics.oop;
+import static agh.ics.oop.Direction.*;
 import static java.lang.System.out;
 
 import java.util.ArrayList;
@@ -32,10 +33,10 @@ public abstract class World {
                 dir.add(Direction.BACKWARD);
             }
             if(c == 'r'){
-                dir.add(Direction.RIGHT);
+                dir.add(RIGHT);
             }
             if(c == 'l'){
-                dir.add(Direction.LEFT);
+                dir.add(LEFT);
             }
         }
         return dir;
@@ -43,11 +44,13 @@ public abstract class World {
 
 
     public static void main(String[] args){
+        //LAB 1
+        /*
         out.println("System wystartował");
         run(convert(Arrays.toString(args)));
         out.println("System zakończył działanie");
 
-
+        //LAB 2
         Vector2d position1 = new Vector2d(1,2);
         System.out.println(position1);
         Vector2d position2 = new Vector2d(-2,1);
@@ -58,7 +61,30 @@ public abstract class World {
         out.println(direction.next());
         out.println(direction.previous());
         out.println(direction.toUnitVector());
-        out.println(direction.toString());
+        out.println(direction.toString());*/
+
+
+
+        //LAB 3
+        Animal animal = new Animal();
+        out.println("----------'-'----------");
+        animal.move(FORWARD);
+        animal.move(LEFT);
+        out.println(animal);
+        out.println("----------'-'----------");
+
+        OptionsParser abc = new OptionsParser();
+        String[] tab = {"f", "forward", "b", "f"};
+        List<Direction> dir = abc.parse(tab);
+
+        for(Direction arg: dir){
+            animal.move(arg);
+            out.println(animal);
+        }
+        out.println(animal);
+
+
+
     }
 
     abstract String toString(int x, int y);

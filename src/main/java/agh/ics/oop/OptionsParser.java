@@ -1,8 +1,8 @@
 package agh.ics.oop;
 
 import java.util.*;
-import static agh.ics.oop.Direction.BACKWARD;
-import static agh.ics.oop.Direction.FORWARD;
+
+import static agh.ics.oop.Direction.*;
 
 public class OptionsParser {
 
@@ -13,6 +13,8 @@ public class OptionsParser {
             switch (argument){
                 case "f", "forward" -> dir.add(FORWARD);
                 case "b", "backword" -> dir.add(BACKWARD);
+                case "r", "right" -> dir.add(RIGHT);
+                case "l", "left" -> dir.add(LEFT);
             }
         }
         return dir;

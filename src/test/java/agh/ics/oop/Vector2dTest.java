@@ -3,7 +3,7 @@ package agh.ics.oop;
 import agh.ics.oop.Vector2d;
 
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 
 public class Vector2dTest {
@@ -12,10 +12,9 @@ public class Vector2dTest {
     @Test
     public void isEquals(){
 
-        Assert.assertTrue(vector.equals(new Vector2d(3,6)));
-        Assert.assertTrue(vector.equals(new Vector2d(4,5)));
-        Assert.assertTrue(vector.equals(vector));
-        Assert.assertFalse(vector.equals("Hi"));
+        Assert.assertEquals(new Vector2d(4, 5), vector);
+        Assert.assertEquals(vector, vector);
+        Assert.assertNotEquals(new Vector2d(3, 6),vector, "Hi");
     }
 
     @Test
@@ -25,25 +24,25 @@ public class Vector2dTest {
 
     @Test
     public void isPreceses(){
-        Assert.assertTrue(vector.precedes(new Vector2d(1,3)));
+        Assert.assertFalse(vector.precedes(new Vector2d(1,3)));
         Assert.assertFalse(vector.precedes(new Vector2d(1,6)));
-        Assert.assertFalse(vector.precedes(new Vector2d(6,6)));
+        Assert.assertTrue(vector.precedes(new Vector2d(6,6)));
     }
 
     @Test
     public void followsTest(){
-        Assert.assertTrue(vector.follows(new Vector2d(6,5)));
+        Assert.assertTrue(vector.follows(new Vector2d(4,3)));
         Assert.assertTrue(vector.follows(new Vector2d(4,5)));
-        Assert.assertFalse(vector.follows(new Vector2d(2,5)));
+        Assert.assertFalse(vector.follows(new Vector2d(6,9)));
     }
 
     @Test
     public void upperRightTest(){
-        Assert.assertEquals(vector.upperRight(new Vector2d(3,8)),"(4,8)");
+        Assert.assertEquals(vector.upperRight(new Vector2d(3,8)),new Vector2d(4,8));
     }
     @Test
     public void lowerLeftTest(){
-        Assert.assertEquals(vector.lowerLeft(new Vector2d(3,8)),"(3,5)");
+        Assert.assertEquals(vector.lowerLeft(new Vector2d(3,8)),new Vector2d(3,5));
     }
 
     @Test
@@ -53,7 +52,7 @@ public class Vector2dTest {
 
     @Test
     public void subtractTest(){
-        Assert.assertEquals(vector.subtract(new Vector2d(3,8)), new Vector2d(1,-3));
+        Assert.assertEquals(vector.subtract(new Vector2d(3,8)), new Vector2d(-1,3));
     }
 
     @Test

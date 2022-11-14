@@ -2,7 +2,7 @@ package agh.ics.oop;
 
 import agh.ics.oop.MapDirection;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class MapDirectionTest {
     @Test

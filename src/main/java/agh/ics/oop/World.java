@@ -1,5 +1,6 @@
 package agh.ics.oop;
 import static agh.ics.oop.Direction.*;
+import static agh.ics.oop.SimulationEngine.*;
 import static java.lang.System.out;
 
 import java.util.ArrayList;
@@ -66,24 +67,35 @@ public abstract class World {
 
 
         //LAB 3
-        Animal animal = new Animal();
-        out.println("----------'-'----------");
-        animal.move(FORWARD);
-        animal.move(LEFT);
-        out.println(animal);
-        out.println("----------'-'----------");
 
-        OptionsParser abc = new OptionsParser();
-        String[] tab = {"f", "forward", "b", "f"};
-        List<Direction> dir = abc.parse(tab);
+        // Animal animal = new Animal(null);
+//        out.println("----------'-'----------");
+//        animal.move(FORWARD);
+//        animal.move(LEFT);
+//        out.println(animal);
+//        out.println("----------'-'----------");
+//
+//        OptionsParser abc = new OptionsParser();
+//        String[] tab = {"f", "forward", "b", "f"};
+//        List<Direction> dir = abc.parse(tab);
+//
+//        for(Direction arg: dir){
+//            animal.move(arg);
+//            out.println(animal);
+//        }
+//        out.println(animal);
 
-        for(Direction arg: dir){
-            animal.move(arg);
-            out.println(animal);
-        }
-        out.println(animal);
+        //LAB 4
 
-
+        List<Direction> directions = new OptionsParser().parse(args); //"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"
+        IWorldMap map = new RectangularMap(10, 5);
+        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4)) ;
+        Animal animal1 = new Animal(map, positions.get(0) );
+        Animal animal2 = new Animal(map, positions.get(1));
+        SimulationEngine engine = new SimulationEngine(directions, map, positions);
+        engine.addAnimal(animal1);
+        engine.addAnimal(animal2);
+        engine.run();
 
     }
 

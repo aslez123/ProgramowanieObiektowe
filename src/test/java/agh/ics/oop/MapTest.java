@@ -19,8 +19,6 @@ public class MapTest {
         Animal animal1 = new Animal(map, positions.get(0) );
         Animal animal2 = new Animal(map, positions.get(1));
         SimulationEngine engine = new SimulationEngine(directions, map, positions);
-        engine.addAnimal(animal1);
-        engine.addAnimal(animal2);
         Assert.assertEquals(
                 op.parse(new String[] {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"}),
                 List.of(FORWARD, BACKWARD, RIGHT, LEFT, FORWARD, FORWARD, RIGHT, RIGHT, FORWARD, FORWARD, FORWARD, FORWARD, FORWARD, FORWARD, FORWARD, FORWARD)

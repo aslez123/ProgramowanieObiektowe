@@ -17,38 +17,29 @@ public class SimulationEngine implements IEngine{
         this.vectorList = vectorList;
     }
 
-    public void addAnimal(Animal animal){
-        animalList.add(animal);
-    }
-
 
     @Override
     public void run() {
-        int temp = (int)size(directions)/size(animalList);
-        int rest = size(directions)%size(animalList);
-        for(int j = 0; j < temp; j++){
-            for(int i = 0; i<size(animalList); i++)
-                animalList.get(i).move(directions.get(i + temp));
+        ArrayList<Animal> animalList = new ArrayList<>();
+        for (Vector2d vector : vectorList) {
+            Animal newAnimal = new Animal(map, vector);
+            animalList.add(newAnimal);
         }
-        if(rest!=0){
-            for(int i = 0; i<rest; i++)
-                animalList.get(i).move(directions.get(temp*size(animalList)+i));
+        int temp = (int) size(directions) / size(animalList);
+        int rest = size(directions) % size(animalList);
+        for (int j = 0; j < temp; j++) {
+            for (int i = 0; i < size(animalList); i++)
+                animalList.get(i).move(directions.get(i + temp-1));
+        }
+        if (rest != 0) {
+            for (int i = 0; i < rest; i++)
+                animalList.get(i).move(directions.get(temp * size(animalList) + i));
         }
 
     }
 
-    @Override
-    public void run(String directions) {
-        String correctDirections = directions.trim();
-        int temp = (int)correctDirections.length()/size(animalList);
-        int rest = correctDirections.length()%size(animalList);
-        for(int j = 0; j < temp; j++){
-            for(int i = 0; i<size(animalList); i++)
-                animalList.get(i).move(World.convert(correctDirections).get(i + temp));
-            }
-        if(rest!=0){
-            for(int i = 0; i<rest; i++)
-                animalList.get(i).move(World.convert(correctDirections).get(temp*size(animalList)+i));
-        }
-    }
+//    public void run(String directions) {
+//
+//    }
+
 }

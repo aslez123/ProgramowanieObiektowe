@@ -5,18 +5,21 @@ import static agh.ics.oop.MapDirection.NORTH;
 
 public class Animal {
     private MapDirection direction = NORTH;
-    Vector2d position = new Vector2d(2, 2);
-    IWorldMap map;
+    private Vector2d position = new Vector2d(2, 2);
+    private final IWorldMap map;
 
     //public Animal(){} konstruktor bez parametrowy nie ma sensu ponieważ aby użyć metody move potrzebujemy mieć dostęp do map
     public Animal(IWorldMap map) {
         this.map = map;
     }
-    public Animal(IWorldMap map, Vector2d initialPosition) {
+    public Animal(IWorldMap map, Vector2d position) {
         this.map = map;
-        this.position = initialPosition;
+        this.position = position;
     }
 
+    public Vector2d getPosition(){
+        return this.position;
+    }
     @Override
     public String toString() {
         return switch (direction) {
@@ -27,12 +30,12 @@ public class Animal {
         };
     }
 
-    private boolean isAt(Vector2d position1) {
-        return position1 == position;
+    public boolean isAt(Vector2d otherPosition) {
+        return otherPosition.equals(this.position);
     }
 
-    public Vector2d move(Direction direction1) {
-        Vector2d oldPosition = new Vector2d(position.x, position.y);
+    public void move(Direction direction1) {
+        Vector2d oldPosition = new Vector2d(this.position.x, this.position.y);
         if (direction1 == RIGHT) {
             direction = (MapDirection) direction.next();
         }
@@ -56,9 +59,8 @@ public class Animal {
             }
         }
 
-        if (map.canMoveTo(position)) {
-            return position;
+        if (!map.canMoveTo(position)) {
+            position = oldPosition;
         }
-        return oldPosition;
     }
 }

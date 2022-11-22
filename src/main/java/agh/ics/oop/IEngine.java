@@ -17,5 +17,5 @@ public interface IEngine {
      */
     void run();
 
-    void run(String directions);
+//    void run(String directions);
 }

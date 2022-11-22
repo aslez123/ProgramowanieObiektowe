@@ -1,6 +1,7 @@
 package agh.ics.oop;
 import static agh.ics.oop.Direction.*;
 import static agh.ics.oop.SimulationEngine.*;
+import static java.lang.System.clearProperty;
 import static java.lang.System.out;
 
 import java.util.ArrayList;
@@ -45,59 +46,23 @@ public abstract class World {
 
 
     public static void main(String[] args){
-        //LAB 1
-        /*
-        out.println("System wystartował");
-        run(convert(Arrays.toString(args)));
-        out.println("System zakończył działanie");
 
-        //LAB 2
-        Vector2d position1 = new Vector2d(1,2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
-        System.out.println(position2);
-        System.out.println(position1.add(position2));
-
-        MapDirection direction = MapDirection.SOUTH;
-        out.println(direction.next());
-        out.println(direction.previous());
-        out.println(direction.toUnitVector());
-        out.println(direction.toString());*/
-
-
-
-        //LAB 3
-
-        // Animal animal = new Animal(null);
-//        out.println("----------'-'----------");
-//        animal.move(FORWARD);
-//        animal.move(LEFT);
-//        out.println(animal);
-//        out.println("----------'-'----------");
-//
-//        OptionsParser abc = new OptionsParser();
-//        String[] tab = {"f", "forward", "b", "f"};
-//        List<Direction> dir = abc.parse(tab);
-//
-//        for(Direction arg: dir){
-//            animal.move(arg);
-//            out.println(animal);
-//        }
-//        out.println(animal);
-
-        //LAB 4
-
-        List<Direction> directions = new OptionsParser().parse(args); //"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"
-        IWorldMap map = new RectangularMap(10, 5);
-        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4)) ;
-        Animal animal1 = new Animal(map, positions.get(0) );
-        Animal animal2 = new Animal(map, positions.get(1));
-        SimulationEngine engine = new SimulationEngine(directions, map, positions);
-        engine.addAnimal(animal1);
-        engine.addAnimal(animal2);
+        //LAB 5
+        GrassField grassMap = new GrassField(10);
+        grassMap.add_grass();
+        grassMap.listOfAnimals.add(new Animal(grassMap, new Vector2d(3,5)));
+        grassMap.listOfAnimals.add(new Animal(grassMap, new Vector2d(4,7)));
+        RectangularMap map = new RectangularMap(4,9);
+        List<Direction> directions = new OptionsParser().parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"}); //"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"
+        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4), new Vector2d(6,7),new Vector2d(6,9)) ;
+        SimulationEngine engine = new SimulationEngine(directions, grassMap, positions);
         engine.run();
+        grassMap.listOfAnimals.add(new Animal(map,new Vector2d(2,4)));
+        out.println(grassMap.listOfAnimals);
+
+        out.println(map.toString());
+        out.println(grassMap.toString());
 
     }
-
     abstract String toString(int x, int y);
 }

@@ -1,13 +1,14 @@
 package agh.ics.oop;
 
+
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RectangularMap extends AbstractWorldMap{
     int width;
     int height;
-    List<Animal>listOfAnimals = new ArrayList<>();
-
+    Map<Vector2d, Animal> animalList = new HashMap<>();
     public RectangularMap(int width, int height) {
         this.width = width;
         this.height = height;
@@ -15,15 +16,8 @@ public class RectangularMap extends AbstractWorldMap{
         this.lowerLeft = new Vector2d(0,0);
     }
     @Override
-    public void setPrintBounds() {
-        printLowerLeft = this.lowerLeft;
-        printUpperRight = this.upperRight;
+    public Vector2d[] setPrintBounds() {
+        return new Vector2d[]{this.lowerLeft, this.upperRight};
     }
 
-    @Override
-    public Object objectAt(Vector2d position) {
-        if (!isOccupied(position))
-            return new Animal(this, position);
-        return null;
-    }
 }

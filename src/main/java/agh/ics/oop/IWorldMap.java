@@ -1,5 +1,9 @@
 package agh.ics.oop;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The interface responsible for interacting with the map of the world.
  * Assumes that Vector2d and MoveDirection classes are defined.
@@ -9,6 +13,8 @@ package agh.ics.oop;
  */
 
 public interface IWorldMap {
+
+    Map<Vector2d, Animal> animalList = new HashMap<>();
 
     /**
      * Indicate if any object can move to the given position.

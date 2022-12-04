@@ -6,7 +6,7 @@ import static agh.ics.oop.Direction.*;
 
 public class OptionsParser {
 
-    public List<Direction> parse(String[] tab){
+    public static List<Direction> parse(String[] tab){
         List<Direction> dir = new ArrayList<>();
 
         for(String argument: tab){

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="agh.ics.oop.GrassFieldTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-11-22T02:37:58" hostname="LAPTOP-HJ65CCOR" time="0.029">
+<testsuite name="agh.ics.oop.RectangularMapTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-11-25T15:15:53" hostname="LAPTOP-HJ65CCOR" time="0.024">
   <properties/>
-  <testcase name="placeTest()" classname="agh.ics.oop.GrassFieldTest" time="0.029">
+  <testcase name="placeTest()" classname="agh.ics.oop.RectangularMapTest" time="0.024">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
 	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:35)
 	at app//org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:179)
-	at app//agh.ics.oop.GrassFieldTest.placeTest(GrassFieldTest.java:19)
+	at app//agh.ics.oop.RectangularMapTest.placeTest(RectangularMapTest.java:19)
 	at java.base@17.0.4.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base@17.0.4.1/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base@17.0.4.1/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

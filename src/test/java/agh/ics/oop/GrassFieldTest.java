@@ -3,6 +3,10 @@ package agh.ics.oop;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.testng.Assert.assertThrows;
+
 public class GrassFieldTest {
     @Test
     void canMoveToTest() {
@@ -12,34 +16,28 @@ public class GrassFieldTest {
     }
 
     @Test
-    void placeTest() {
-        IWorldMap map = new GrassField(4);
-        Vector2d position = new Vector2d(2,3);
-        Animal a = new Animal(map, position);
-        Assertions.assertTrue(map.place(a));
+    void testPLaceAnimal() {
+        GrassField map = new GrassField(10);
+        assertDoesNotThrow(() -> map.place(new Animal(map, new Vector2d(1, 1))));
+        assertThrows(IllegalArgumentException.class, () -> map.place(new Animal(map, new Vector2d(1, 1))));
     }
-
     @Test
-    void isOccupiedTest() {
-        IWorldMap map = new GrassField(1);
-        Vector2d position = new Vector2d(5,3);
-        Animal a = new Animal(map, position);
-        map.place(a);
-        Assertions.assertTrue(map.isOccupied(position));
-        Assertions.assertFalse(map.isOccupied(new Vector2d(-10,1)));
-        int touchedGrass = 0;
-        Vector2d testVector;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                testVector = new Vector2d(i, j);
-                if (map.isOccupied(testVector)) {
-                    touchedGrass += 1;
-                }
-            }
-        }
-        Assertions.assertEquals(1, touchedGrass);
-    }
+    void testMoveAnimalOnOtherAnimalPlace() {
+        GrassField map = new GrassField(0);
+        Vector2d pos = new Vector2d(1, 3);
 
+        map.place(new Animal(map, pos));
+
+        Assertions.assertFalse(map.canMoveTo(pos));
+    }
+    @Test
+    void testIsOccupied() {
+        GrassField map = new GrassField(0);
+        Vector2d pos = new Vector2d(1, 2);
+
+        map.place(new Animal(map, pos));
+        Assertions.assertTrue(map.isOccupied(pos));
+    }
     @Test
     void objectAtTest() {
         IWorldMap map = new GrassField(1);

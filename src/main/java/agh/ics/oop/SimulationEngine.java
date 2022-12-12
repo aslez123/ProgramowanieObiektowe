@@ -1,13 +1,6 @@
 package agh.ics.oop;
 
-import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.common.collect.Iterables.size;
-import static java.lang.System.out;
-
-import java.lang.*;
 import java.util.Map;
 
 public class SimulationEngine implements IEngine{
@@ -26,6 +19,7 @@ public class SimulationEngine implements IEngine{
     public Map<Vector2d, Animal> run() {
         for (Vector2d vector : vectorList) {
             Animal newAnimal = new Animal(map, vector);
+            map.place(newAnimal);
             animalList.put(vector, newAnimal);
         }
         int current = 0;

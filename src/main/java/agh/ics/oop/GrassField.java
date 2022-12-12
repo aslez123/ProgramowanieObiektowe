@@ -6,23 +6,38 @@ import static java.lang.Math.sqrt;
 
 public class GrassField extends AbstractWorldMap{
 
-    Map<Vector2d, Animal> animalList = new HashMap<>();
-    public Vector2d lowerGrass;
-    public Vector2d upperGrass;
+    public Map<Vector2d, Animal> animalList = new HashMap<>();
     public int grassNumber;
-    public Vector2d printLowerLeft, printUpperRight;
-    Map<Vector2d,Grass> grassList;
+    Map<Vector2d,Grass> grassList = new HashMap<>();
+    MapBoundary mapBoundary;
     public GrassField(int grassNumber){
         this.grassNumber = grassNumber;
-        this.lowerGrass = new Vector2d(0,0);
-        this.upperGrass = new Vector2d((int)sqrt(this.grassNumber*10),(int)sqrt(this.grassNumber*10));
-        this.grassList = new HashMap<>();
+        this.mapBoundary = new MapBoundary();
+    }
+    public GrassField(MapBoundary mapBoundray, int grassNumber){
+        this.grassNumber = grassNumber;
+        this.mapBoundary = mapBoundray;
     }
 
+
+    @Override
+    public Vector2d getLowerLeft() {
+        return mapBoundary.getLowerLeft();
+    }
+
+    @Override
+    public Vector2d getUpperRight() {
+        return mapBoundary.getUpperRight();
+    }
     @Override
     public boolean isOccupied(Vector2d position) {
         if (super.isOccupied(position)) {return true;}
         return (grassList.get(position) != null);
+    }
+    @Override
+    public void place(Animal animal) throws IllegalArgumentException{
+        super.place(animal);
+        mapBoundary.add(animal);
     }
 
     @Override
@@ -34,28 +49,7 @@ public class GrassField extends AbstractWorldMap{
     }
 
     public Vector2d[] setPrintBounds() {
-        Set<Vector2d> temp = this.animalList.keySet();
-        ArrayList<Vector2d> positions = new ArrayList<>(temp);
-        if (!this.animalList.isEmpty()) {
-            printLowerLeft = printUpperRight = positions.get(0);
-        }
-        else if (!this.grassList.isEmpty()) {
-            printLowerLeft = printUpperRight = this.grassList.get(0).getPosition();
-        }
-        else {
-            printLowerLeft = new Vector2d(0,0);
-            printUpperRight = new Vector2d(0,0);
-            return new Vector2d[]{printLowerLeft, printUpperRight};
-        }
-        for (Animal i: animalList.values()) {
-            printLowerLeft = printLowerLeft.lowerLeft(i.getPosition());
-            printUpperRight = printUpperRight.upperRight(i.getPosition());
-        }
-        for (Grass i: grassList.values()) {
-            printLowerLeft = printLowerLeft.lowerLeft(i.getPosition());
-            printUpperRight = printUpperRight.upperRight(i.getPosition());
-        }
-        return new Vector2d[]{printLowerLeft, printUpperRight};
+        return new Vector2d[]{getLowerLeft(), getUpperRight()};
     }
 
     public void add_grass(){
@@ -68,6 +62,7 @@ public class GrassField extends AbstractWorldMap{
             Grass grass = new Grass(new Vector2d(x, y));
             if(!isOccupied(grass.getPosition())){
                 grassList.put(new Vector2d(x, y),new Grass(new Vector2d(x, y)));
+                mapBoundary.add(grass);
             }
         }
     }

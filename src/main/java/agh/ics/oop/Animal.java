@@ -2,7 +2,6 @@ package agh.ics.oop;
 
 import java.util.ArrayList;
 
-import static agh.ics.oop.Direction.*;
 import static agh.ics.oop.MapDirection.NORTH;
 
 public class Animal {
@@ -10,6 +9,7 @@ public class Animal {
     private MapDirection direction = NORTH;
     private Vector2d position = new Vector2d(2, 2);
     private final IWorldMap map;
+
     ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
 
     public Animal(IWorldMap map) {
@@ -49,32 +49,26 @@ public class Animal {
     }
 
     public void move(Direction direction1) {
-        Vector2d oldPosition = new Vector2d(this.position.x, this.position.y);
-        if (direction1 == RIGHT) {
-            direction = (MapDirection) direction.next();
-        }
-        if (direction1 == LEFT) {
-            direction = (MapDirection) direction.previous();
-        }
-        if (direction1 == BACKWARD) {
-            switch (direction) {
-                case NORTH -> position.y -= 1;
-                case SOUTH -> position.y += 1;
-                case EAST -> position.x -= 1;
-                case WEST -> position.x += 1;
+        switch(direction1) {
+            case FORWARD -> {
+                moveIfPossible(position.add(direction.toUnitVector()));
+            }
+            case BACKWARD -> {
+                moveIfPossible(position.subtract(direction.toUnitVector()));
+            }
+            case RIGHT -> {
+                direction = (MapDirection) direction.next();
+            }
+            case LEFT -> {
+                direction = (MapDirection) direction.previous();
+            }
+            default -> {
             }
         }
-        if (direction1 == FORWARD) {
-            switch (direction) {
-                case NORTH -> position.y += 1;
-                case SOUTH -> position.y -= 1;
-                case EAST -> position.x += 1;
-                case WEST -> position.x -= 1;
-            }
-        }
+    }
 
-        if (!map.canMoveTo(position)) {
-            position = oldPosition;
-        }
+    private void moveIfPossible(Vector2d destination) {
+        if(map.canMoveTo(destination))
+            position = destination;
     }
 }

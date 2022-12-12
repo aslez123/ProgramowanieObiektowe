@@ -17,22 +17,23 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        MapBoundary mapBoundary = new MapBoundary();
-//        GrassField grassMap = new GrassField(mapBoundary,3);
-//        grassMap.add_grass();
-//        String[] args = getParameters().getRaw().toArray(new String[0]);
-//        List<Direction> directions = OptionsParser.parse(args);
-//        List<Vector2d> positions = List.of(new Vector2d(3, 4), new Vector2d(1, 4));
-//        SimulationEngine engine = new SimulationEngine(directions, grassMap, positions);
-//        grassMap.animalList = engine.run();
+        System.out.println("xD");
+        MapBoundary mapBoundary = new MapBoundary();
+        GrassField grassMap = new GrassField(mapBoundary,3);
+        grassMap.add_grass();
+        String[] args = getParameters().getRaw().toArray(new String[0]);
+        List<Direction> directions = OptionsParser.parse(args);
+        List<Vector2d> positions = List.of(new Vector2d(3, 4), new Vector2d(1, 4));
+        SimulationEngine engine = new SimulationEngine(directions, grassMap, positions);
+        grassMap.animalList = engine.run();
 //
 //
         GridPane grid = new GridPane();
         grid.setGridLinesVisible(true);
         grid.setPadding(new Insets(10, 10, 10, 10));
 //
-////        drawHeader(grassMap, grid);
-////        drawObjects(grassMap, grid);
+        drawHeader(grassMap, grid);
+        drawObjects(grassMap, grid);
 //
         Scene scene = new Scene(grid, 400, 400);
         primaryStage.setScene(scene);

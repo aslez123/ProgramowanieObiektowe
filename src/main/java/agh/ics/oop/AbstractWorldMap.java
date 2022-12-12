@@ -8,7 +8,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     Vector2d lowerLeft = new Vector2d(Integer.MIN_VALUE,Integer.MIN_VALUE);
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return position.precedes(this.upperRight) && position.follows(this.lowerLeft) && !isOccupied(position);
+        return position.precedes(this.upperRight) && position.follows(this.lowerLeft);
     }
 
     @Override

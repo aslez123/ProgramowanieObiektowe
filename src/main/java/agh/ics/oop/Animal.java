@@ -1,10 +1,12 @@
 package agh.ics.oop;
 
+import agh.ics.oop.gui.IMapElement;
+
 import java.util.ArrayList;
 
 import static agh.ics.oop.MapDirection.NORTH;
 
-public class Animal {
+public class Animal implements IMapElement {
 
     private MapDirection direction = NORTH;
     private Vector2d position = new Vector2d(2, 2);
@@ -19,10 +21,22 @@ public class Animal {
         this.map = map;
         this.position = position;
     }
-
+    @Override
     public Vector2d getPosition(){
         return this.position;
     }
+
+    @Override
+    public String getImagePath() {
+        return String.format("src/main/resources/%s.png", toString());
+    }
+
+    @Override
+    public String getName() {
+        return String.format("Z %s", position.toString());
+    }
+
+
     @Override
     public String toString() {
         return switch (direction) {
